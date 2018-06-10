@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>LocalStorage</title>
+    </head>
+    <body>
+        <textarea id="msg"></textarea>
+        <button id="enviar">Enviar</button>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script>
+            $(function(){
+                if(sessionStorage.msg){
+                    $(`#msg`).val(sessionStorage.msg)
+                }
+                $(`#msg`).keyup(function(){
+                    sessionStorage.msg = $(this).val()  
+
+                })
+                $(`#enviar`).click(function(){
+                    setTimeout(function(){
+                        // simulando delay rede
+                        $(`#msg`).val(``)
+                        sessionStorage.removeItem(`msg`)
+                    }, 2000)
+                })
+            })
+        </script>
+    </body>
+</html>
