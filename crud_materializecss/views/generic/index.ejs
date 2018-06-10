@@ -1,0 +1,40 @@
+<% include ../partials/header.ejs %>
+<h3>Contact</h3>
+<p><a type="button" class="btn btn-info" href="/newPerson">New contact</a></p>
+
+<table class="">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>phone</th>
+    </tr>
+    <% results.data.map((contact) => {  %>
+    <tr>
+        <td><%= contact.idContact %></td>
+        <td><%= contact.name %></td>
+        <td><%= contact.phone %></td>
+        <td>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a class="btn" href="/detail/<%= contact.idContact %>">Edit</a>
+                <a class="btn" href="/deletePerson/<%= contact.idContact %>" onclick="return confirm('Deseja excluir?')">Remove</a>
+                <a class="btn" href="/">Files</a>
+            </div>
+        </td>
+    </tr>
+    <% }) %>
+</table>
+
+<ul class="pagination">
+    <% if(results.pagination.currentPage > 0) { %>
+        <li class="waves-effect"><a class="" href="?page=<%= results.pagination.currentPage-1 %>&pageSize=<%= results.pagination.pageSize %>"><i class="material-icons">chevron_left</i></a></li>
+    <% } %>
+    
+    <% for(let i=0; i < results.pagination.pages; i++) { %>
+        <li class=" <% if(i==results.pagination.currentPage){ %> active <% } %>"><a class="" href="?page=<%= i %>&pageSize=<%= results.pagination.pageSize %>"><%= (i+1) %></a></li>
+    <% } %>
+    
+    <% if(results.pagination.currentPage < results.pagination.pages-1) { %>
+        <li class="waves-effect"><a class="" href="?page=<%= (results.pagination.currentPage+1) %>&pageSize=<%= results.pagination.pageSize %>"><i class="material-icons">chevron_right</i></a></li>
+    <% } %>
+</ul>
+<% include ../partials/footer.ejs %>

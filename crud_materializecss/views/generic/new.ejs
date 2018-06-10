@@ -1,0 +1,15 @@
+<% include ../partials/header.ejs %>
+<h1>Nova pessoa</h1>
+<p><a href="/">Voltar a lista de pessoas</a></p>
+<form method="post" action="/insertPerson">
+  <div class="form-group">
+    <label for="nome">Name</label>
+    <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" placeholder="Nome" name="name">
+  </div>
+  <div class="form-group">
+    <label for="nascimento">Phone</label>
+    <input type="text" class="form-control" id="nascimento" aria-describedby="emailHelp" placeholder="Nascimento" name="phone">
+  </div>
+  <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+<% include ../partials/footer.ejs %>
