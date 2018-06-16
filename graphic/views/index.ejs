@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+  <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-base.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-ui.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.2.1/js/anychart-exports.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.2.1/css/anychart-ui.min.css" />
+  <link rel="stylesheet" href="https://cdn.anychart.com/releases/8.2.1/fonts/css/anychart-font.min.css" />
+   <!-- Compiled and minified CSS -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+   <!-- Compiled and minified JavaScript -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <style>
+    .display {
+      height: 400px
+    }
+  </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col s12 m6">
+            <form action="/" method="POST"> 
+              <div class="card ">
+                <div class="card-content">
+                  <span class="card-title">Empresas</span> 
+                  <div class="row">                                 
+                    <div class="input-field col s12">
+                      <input placeholder="Placeholder" id="first_name" type="text" class="validate" name="nome">
+                      <label for="first_name">Intituição/Empresa</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <input id="last_name" type="text" class="validate" name="salario">
+                      <label for="last_name">Salário</label>
+                    </div>                  
+                  </div>                  
+                </div>
+                <div class="card-action">
+                  <button type="submit" class="btn">Adicionar</button>                  
+                </div>
+              </div>
+            </form>
+            <a href="/restart">Resetar valores</a>
+          </div> 
+          <div class="col s12 m6 display" id="graphic"></div>    
+          <div class="col s12 m12">
+              <table class="">
+                  <tr>
+                      <th>Empresa</th>
+                      <th>Salário</th>
+                  </tr>
+                  <% results.map((empresa) => {  %>
+                  <tr>
+                      <td><%= empresa.nome %></td>
+                      <td><%= empresa.salario %></td>
+                  </tr>
+                  <% }) %> 
+              </table>
+          </div>         
+        </div>
+    </div>
+    <script>
+        $(function(){
+          anychart.onDocumentReady(function() {
+            // create pie chart with passed data
+            const data = `<% results.map((empresa) => { %>["<%= empresa.nome %>","<%= empresa.salario %>"]_<% }) %>` 
+            const graphic = data.substring(0,(data.length - 1)) 
+            var myArr = new Array()
+            var myArr = graphic.split("_")
+            var array = JSON.parse("[" + myArr + "]");
+            console.log(array)
+            const chart = anychart.pie(array)
+    
+            // creates palette
+            const palette = anychart.palettes.distinctColors()
+            palette.items([{
+                color: '#7d9db6'
+              },
+              {
+                color: '#8db59d'
+              },
+              {
+                color: '#f38367'
+              },
+              {
+                color: '#b97792'
+              },
+              {
+                color: '#b97758'
+              }
+            ])
+    
+            //set chart radius
+            chart.radius('43%')
+              // create empty area in pie chart
+              .innerRadius('60%')
+              // set chart palette
+              .palette(palette)
+    
+            // set outline settings
+            chart.outline()
+              .width('3%')
+              .fill(function() {
+                return anychart.color.darken(this.sourceColor, 0.25)
+              })
+    
+            // format tooltip
+            chart.tooltip().format('Salário: {%PercentValue}%')
+    
+            // create standalone label and set label settings
+            const label = anychart.standalones.label()
+            label.enabled(true)
+              .text('Operating System Market\nShare (Console)')
+              .width('100%')
+              .height('100%')
+              .adjustFontSize(true, true)
+              .minFontSize(10)
+              .maxFontSize(25)
+              .fontColor('#60727b')
+              .position('center')
+              .anchor('center')
+              .hAlign('center')
+              .vAlign('middle')
+    
+            // set label to center content of chart
+            chart.center().content(label)
+    
+            // set container id for the chart
+            chart.container('graphic')
+            // initiate chart drawing
+            chart.draw()
+          })
+      })    
+    </script>
+</body>
+</html>
+
+                
