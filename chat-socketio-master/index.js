@@ -113,6 +113,10 @@ io.on('connection', socket => {
     })
     console.log()
 })
+/*
 mongoose.connect('mongodb://localhost/chat-socketio').then(()=>{
     http.listen(port, () => console.log('chat running', port))
 })
+*/
+app.listen(3000, () => console.log('running...', 3000))
+

@@ -1,0 +1,23 @@
+<!--Import jQuery before materialize.js-->
+<script src="/assets/materialize/js/jquery-3.2.1.min.js"></script>
+<script src="/assets/slick/slick.min.js"></script>
+<script src="/assets/materialize/js/materialize.min.js"></script>
+<script>
+    $('.modal').modal();
+    $('.dropdown-button').dropdown({
+                inDuration: 300,
+                outDuration: 225,
+                constrainWidth: false, // Does not change width of dropdown to that of the activator
+                hover: true, // Activate on hover
+                gutter: 0, // Spacing from edge
+                belowOrigin: true, // Displays dropdown below the button
+                // Displays dropdown with edge aligned to the left of button
+                stopPropagation: false // Stops event propagation
+              }
+            );
+    $(".dropdown-content>li>a").css("color", "#ee6e73");
+    $(".button-collapse").sideNav();
+    
+</script>
+</body>
+</html>

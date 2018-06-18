@@ -13,6 +13,5 @@ const calc = () => {
         Salario_Superior: tS 
     }
     console.log(sesi)
-}   
-
+}  
 calc()
