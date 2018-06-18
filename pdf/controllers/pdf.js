@@ -13,7 +13,7 @@ const write = async(req, res) => {
     
         pdf.create(html, options).toFile('file.pdf', function(err, res) {
             if (err) return console.log(err)
-            console.log('PDF salvo') // { filename: '/app/businesscard.pdf' }
+            console.log('PDF salvo...') // { filename: '/app/businesscard.pdf' }
         })
     }) 
 } 
